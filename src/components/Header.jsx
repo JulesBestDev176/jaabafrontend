@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { FaSearch } from "react-icons/fa";
 import { IoIosFlash } from "react-icons/io";
@@ -12,8 +12,10 @@ import { CiHeart } from "react-icons/ci";
 
 
 const Header = () => {
+
+
     return (
-        <div>
+        <div className='fixed-top' >
             <header className='header-top py-2'>
                 <div className="container-xxl">
                     <div className="row">
@@ -78,18 +80,23 @@ const Header = () => {
             <header className="header-bottom py-2">
                 <div className="container-xxl">
                     <div className="row">
-                        <div className="col-4 d-flex justify-content-center border-end align-items-center">
-                            <div className="row d-flex justify-content-center align-items-center">
+                        <div className="dropdown col-2 d-flex justify-content-start border-end align-items-center">
+                            <div className="dropdown-toggle row d-flex justify-content-center align-items-center" data-bs-toggle="dropdown" aria-expanded="false" >
                                 <RiMenu2Fill className='col-3 fs-3' />
                                 <div className='col-6 fs-5'>Categories</div>
                                 <MdOutlineKeyboardArrowDown className='col-3 fs-3' />
                             </div>
+                            <ul className="dropdown-menu dropdown-menu-start mt-2 p-0">
+                                <li className='border-top'><a className="dropdown-item" href="#">Action</a></li>
+                                <li className='border-top'><a className="dropdown-item" href="#">Another action</a></li>
+                                <li className='border-top'><a className="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
                         </div>
-                        <div className="col-4 d-flex justify-content-around align-items-center border-end">
+                        <div className="col-8 d-flex justify-content-around align-items-center border-end">
                             <Link to='/' className='txt-noire'>Accueil</Link>
                             <Link to='/produits' className='txt-noire'>Produits</Link>
                         </div>
-                        <div className="col-2 d-flex justify-content-end align-items-center">
+                        <div className="col-2 d-flex justify-content-center align-items-center">
                             <CiHeart className='fs-2 txt-gray' />
                         </div>
                     </div>

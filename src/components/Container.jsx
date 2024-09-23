@@ -7,7 +7,9 @@ const Container = () => {
     return (
         <>
             <Header />
-            <Outlet />
+            <div style={{ marginTop: '200px' }}> {/* Ajuste la valeur selon la hauteur de ton header */}
+                <Outlet />
+            </div>
             <Footer />
         </>
     )
