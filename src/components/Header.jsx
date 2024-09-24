@@ -14,7 +14,7 @@ import ProduitPanier from './ProduitPanier';
 
 const Header = () => {
 
-    const panier = [
+    const [panier, setPanier] = useState([
         {
             nom: "Samsung Galaxy S23 Ultra",
             prix: 100000,
@@ -27,7 +27,15 @@ const Header = () => {
             photo: "iphone.jpg",
             quantite: 1
         }
-    ]
+    ])
+
+    const updateProduitQuantite = (produitId, nouvelleQuantite) => {
+        // setPanier((prevProduits) =>
+        //     prevProduits.map((prod) =>
+        //         prod.id === produitId ? { ...prod, quantite: nouvelleQuantite } : prod
+        //     )
+        // );
+    };
 
     return (
         <>
@@ -166,27 +174,27 @@ const Header = () => {
                         </div>
                         <div className="modal-body">
                             <form>
-                                <div class="row mb-3">
-                                    <div class="col">
-                                        <input type="text" class="form-control" placeholder="Prenom" aria-label="Prenom" />
+                                <div className="row mb-3">
+                                    <div className="col">
+                                        <input type="text" className="form-control" placeholder="Prenom" aria-label="Prenom" />
                                     </div>
-                                    <div class="col">
-                                        <input type="text" class="form-control" placeholder="Nom" aria-label="Nom" />
+                                    <div className="col">
+                                        <input type="text" className="form-control" placeholder="Nom" aria-label="Nom" />
                                     </div>
                                 </div>
                                 <div className="mb-3">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Type de compte</option>
+                                    <select className="form-select" aria-label="Default select example">
+                                        <option value="" disabled>Type de compte</option>
                                         <option value="client">Client</option>
                                         <option value="vendeur">Vendeur</option>
                                         <option value="livreur">Livreur</option>
                                     </select>
                                 </div>
                                 <div className="mb-3">
-                                    <input type="email" class="form-control" placeholder="Email" aria-label="Email" />
+                                    <input type="email" className="form-control" placeholder="Email" aria-label="Email" />
                                 </div>
                                 <div className="mb-3">
-                                    <input type="password" class="form-control" placeholder="Password" aria-label="Password" />
+                                    <input type="password" className="form-control" placeholder="Password" aria-label="Password" />
                                 </div>
 
                                 <div className="col-12 d-flex">
@@ -206,13 +214,13 @@ const Header = () => {
             {/* Offcanvas Panier */}
             <div className="offcanvas offcanvas-end bg-white" tabIndex="-1" id="panier" aria-labelledby="offcanvasRightLabel">
                 <div className="offcanvas-header border-bottom">
-                    <h5 id="offcanvasRightLabel">Panier ({panier.length}) </h5>
+                    <h5 id="offcanvasRightLabel">Panier  {/*({panier.reduce((total, produit) => total + produit.quantite, 0)}) */} ({panier.length})</h5>
                     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body">
                     <div className="row">
                         {panier.map((produit, index) => {
-                            return <ProduitPanier key={index} produit={produit} />
+                            return <ProduitPanier updateProduitQuantite={updateProduitQuantite} key={index} produit={produit} />
                         })}
                     </div>
                     <div className="row">

@@ -117,6 +117,35 @@ input:focus, textarea:focus, select:focus {
   width: 100px;
 }
 
+.increment, .decrement {
+  border: 1px solid var(--color-blue);
+  background-color: var(--color-blue);
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-white);
+}
+
+.increment {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: none;
+}
+
+.decrement {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: none;
+}
+.valeur {
+  border: 1px solid var(--color-blue);
+  border-radius: 0;
+  text-align: center;
+  height: 20px;
+  
+}
+
 /* Header Fin */
 
 /* Container Debut */
