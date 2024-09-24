@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaStar } from 'react-icons/fa'
+
 const Start = ({ note }) => {
     const ratingValue = note * 5;
     return (

@@ -31,36 +31,46 @@ const Accueil = () => {
 
     const produits = [
         {
-            title: "Electronique",
+
+            title: "electronique",
             produits: [
                 {
+                    id: 1,
                     nom: "Samsung Galaxy",
                     description_courte: "Samsung Galaxy S23 Ultra",
                     prix: "100 000 CFA",
-                    photo: "samsung.jpg"
+                    photo: "samsung.jpg",
+                    quantite: 3
                 },
                 {
+                    id: 2,
                     nom: "IPhone",
                     description_courte: "Apple iPhone 15 Pro Max",
                     prix: "150 000 CFA",
-                    photo: "iphone.jpg"
+                    photo: "iphone.jpg",
+                    quantite: 3
                 }
             ]
         },
         {
-            title: "Mode",
+            title: "mode",
             produits: [
                 {
+                    id: 3,
                     nom: "Polos",
                     description_courte: "Fashion Polos Manches",
                     prix: "12 400 CFA",
-                    photo: "polos.jpg"
+                    photo: "polos.jpg",
+                    quantite: 3
+
                 },
                 {
+                    id: 4,
                     nom: "Adidas",
                     description_courte: "Adidas chaussure à lacet",
                     prix: "12 900 CFA",
-                    photo: "adidas.jpg"
+                    photo: "adidas.jpg",
+                    quantite: 3
                 }
             ]
         }

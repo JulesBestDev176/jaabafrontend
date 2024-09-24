@@ -174,4 +174,9 @@ input:focus, textarea:focus, select:focus {
   transform-origin: left;
   border-radius: 6px;
 }
+
+.star {
+  cursor: pointer;
+  transition: color 200ms;
+}
 /* Container Fin */

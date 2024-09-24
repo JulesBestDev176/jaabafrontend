@@ -12,7 +12,7 @@ const Produits = ({ produits, categorie }) => {
                     <h4>{categorie === undefined ? 'Produits' : `${categorie}`}</h4>
                 </div>
                 <div className="row d-flex">
-                    <div className="col-3 mb-3 border-end">
+                    {/* <div className="col-3 mb-3 border-end">
                         <div className="row p-3">
                             <h6>Prix</h6>
                         </div>
@@ -98,8 +98,8 @@ const Produits = ({ produits, categorie }) => {
 
 
                         </div>
-                    </div>
-                    <div className="col-9 d-flex flex-wrap justify-content-around h-75">
+                    </div> */}
+                    <div className="col-12 d-flex flex-wrap justify-content-around h-75">
                         {
                             categorie === undefined
                                 ? produits.flatMap((categorie) =>
