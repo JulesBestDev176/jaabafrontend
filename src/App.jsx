@@ -8,7 +8,9 @@ import About from './pages/About'
 import Contact from './pages/Contact'
 import Produits from './pages/Produits'
 import OneProduct from './pages/OneProduct';
-
+import Compte from './pages/Compte'
+import Commande from './pages/Commande'
+import Profile from './pages/Profile'
 
 function App() {
 
@@ -69,9 +71,13 @@ function App() {
             <Route path="about" element={<About />} />
             <Route path="contact" element={<Contact />} />
             <Route path="/produits" element={<Produits produits={produits} />} />
-            <Route path="/electronique" element={<Produits produits={produits} categorie={"electronique"} />} />
-            <Route path="/mode" element={<Produits produits={produits} categorie={"mode"} />} />
+            <Route path="/produits/:categorie" element={<Produits produits={produits} />} />
             <Route path="/produit/:id" element={<OneProduct products={produits} />} />
+            <Route path='/compte' element={<Compte />}>
+              <Route path="profile" element={<Profile />} />
+              <Route path="commande" element={<Commande />} />
+            </Route>
+
           </Route>
         </Routes>
       </BrowserRouter>

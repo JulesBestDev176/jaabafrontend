@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link, useNavigate } from 'react-router-dom'
 import { FaSearch } from "react-icons/fa";
 import { IoIosFlash } from "react-icons/io";
 import { TfiHeadphoneAlt } from "react-icons/tfi";
@@ -9,7 +9,6 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { RiMenu2Fill } from "react-icons/ri";
 import { CiHeart } from "react-icons/ci";
 import ProduitPanier from './ProduitPanier';
-
 
 
 const Header = () => {
@@ -27,7 +26,23 @@ const Header = () => {
             photo: "iphone.jpg",
             quantite: 1
         }
-    ])
+    ]);
+
+    const navigate = useNavigate();
+
+    const verif = true;
+
+    const handleConnexion = (e) => {
+        e.preventDefault();
+        if (verif) {
+            navigate('/compte/profile');
+
+        } else {
+            const modalTrigger = document.getElementById('connexionTrigger');
+            modalTrigger.click();
+
+        }
+    };
 
     const updateProduitQuantite = (produitId, nouvelleQuantite) => {
         // setPanier((prevProduits) =>
@@ -36,6 +51,8 @@ const Header = () => {
         //     )
         // );
     };
+
+
 
     return (
         <>
@@ -115,8 +132,8 @@ const Header = () => {
                                 <ul className="dropdown-menu dropdown-menu-start mt-2 p-0">
 
                                     <li className='border-top'><Link to='/produits' className="dropdown-item">Tous</Link></li>
-                                    <li className='border-top'><Link to='/electronique' className="dropdown-item">Electronique</Link></li>
-                                    <li className='border-top'><Link to='/mode' className="dropdown-item">Mode</Link></li>
+                                    <li className='border-top'><Link to='/produits/electronique' className="dropdown-item">Electronique</Link></li>
+                                    <li className='border-top'><Link to='/produits/mode' className="dropdown-item">Mode</Link></li>
                                 </ul>
                             </div>
                             <div className="col-8 d-flex justify-content-around align-items-center border-end">
@@ -138,7 +155,7 @@ const Header = () => {
                     <div className="modal-content">
                         <div className="modal-header">
                             <h1 className="modal-title fs-5" id="exampleModalLabel">Connexion</h1>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button id="connexionTrigger" type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
                             <form>
@@ -152,7 +169,12 @@ const Header = () => {
                                 </div>
                                 <div className="col-12 d-flex ">
                                     <div className="col-8">
-                                        <button type="button" className="btn btn-primary">Se connecter</button>
+                                        <button
+                                            className="btn btn-primary"
+                                            onClick={handleConnexion}
+                                        >
+                                            Se connecter
+                                        </button>
                                     </div>
                                     <div className="col-4 d-flex justify-content-end">
                                         <button type="button" className="btn btn-link link-underline link-underline-opacity-0" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#inscription">S'inscrire</button>

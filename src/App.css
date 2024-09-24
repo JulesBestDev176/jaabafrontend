@@ -179,4 +179,20 @@ input:focus, textarea:focus, select:focus {
   cursor: pointer;
   transition: color 200ms;
 }
+
+.active {
+  position: relative;
+  
+}
+.active::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-blue);
+  transition: width 0.5s ease-in-out;
+  transform-origin: left;
+  border-radius: 6px;
+  top: 40px;
+}
 /* Container Fin */

@@ -1,11 +1,15 @@
 import React from 'react'
 import Produit from '../components/Produit'
+import { useParams } from 'react-router-dom'
 
-const Produits = ({ produits, categorie }) => {
+const Produits = ({ produits }) => {
+    const { categorie } = useParams();
+    console.log(categorie)
+
     return (
         <>
             <div className="row p-3">
-                <p className='txt-gray'>Accueil / Produits / {categorie !== undefined ? `${categorie}` : ''}</p>
+                <p className='txt-gray'>Accueil / Produits / {categorie ? `${categorie}` : ''}</p>
             </div>
             <div className="container-fluid bg-white mb-0 border-bottom">
                 <div className="row p-3">
@@ -101,17 +105,17 @@ const Produits = ({ produits, categorie }) => {
                     </div> */}
                     <div className="col-12 d-flex flex-wrap justify-content-around h-75">
                         {
-                            categorie === undefined
-                                ? produits.flatMap((categorie) =>
-                                    categorie.produits.map((produit) => (
-                                        <Produit key={produit.nom} produit={produit} /> // Assure-toi d'ajouter une clé unique pour chaque produit
+                            !categorie
+                                ? produits.flatMap((cat) =>
+                                    cat.produits.map((produit) => (
+                                        <Produit key={produit.id} produit={produit} />
                                     ))
                                 )
                                 : produits
-                                    .filter((cat) => cat.title === categorie) // Filtrer par la catégorie sélectionnée
+                                    .filter((cat) => cat.title === categorie) // Filtrer par la catégorie
                                     .flatMap((cat) =>
                                         cat.produits.map((produit) => (
-                                            <Produit key={produit.nom} produit={produit} />
+                                            <Produit key={produit.id} produit={produit} />
                                         ))
                                     )
                         }
