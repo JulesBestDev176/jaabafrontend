@@ -22,6 +22,15 @@ body {
 i {
   color: var(--color-blue);
 }
+.no-button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.no-button:hover {
+  color: var(--color-blue);
+}
 a{
   text-decoration: none;
   display: inline-block;
@@ -103,7 +112,10 @@ input:focus, textarea:focus, select:focus {
   width: 100%;
 }
 
-
+.offcanvas {
+  height: 100vh; /* Assure que le modal prend toute la hauteur de la vue */
+  width: 100px;
+}
 
 /* Header Fin */
 

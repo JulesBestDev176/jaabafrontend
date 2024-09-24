@@ -11,6 +11,7 @@ const Container = () => {
                 <Outlet />
             </div>
             <Footer />
+
         </>
     )
 }
