@@ -1,10 +1,125 @@
 import React from 'react'
+import Produit from '../components/Produit'
 
-const Produits = () => {
+const Produits = ({ produits, categorie }) => {
     return (
-        <div>
-            Produits
-        </div>
+        <>
+            <div className="row p-3">
+                <p className='txt-gray'>Accueil / Produits / {categorie !== undefined ? `${categorie}` : ''}</p>
+            </div>
+            <div className="container-fluid bg-white mb-0 border-bottom">
+                <div className="row p-3">
+                    <h4>{categorie === undefined ? 'Produits' : `${categorie}`}</h4>
+                </div>
+                <div className="row d-flex">
+                    <div className="col-3 mb-3 border-end">
+                        <div className="row p-3">
+                            <h6>Prix</h6>
+                        </div>
+                        <div className="row p-3">
+                            <div class="form-check m-2">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    0 CFA - 5 000 CFA
+                                </label>
+                            </div>
+                            <div class="form-check m-2">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    5 000 CFA - 10 000 CFA
+                                </label>
+                            </div>
+                            <div class="form-check m-2">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    10 000 CFA - 20 000 CFA
+                                </label>
+                            </div>
+                            <div class="form-check m-2">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    20 000 CFA - 30 000 CFA
+                                </label>
+                            </div>
+                            <div class="form-check m-2">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    30 000 CFA - 40 000 CFA
+                                </label>
+                            </div>
+                            <div class="form-check m-2">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    50 000 CFA - 100 000 CFA
+                                </label>
+                            </div>
+                            <div class="form-check m-2">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    100 000 CFA - 150 000 CFA
+                                </label>
+                            </div>
+                            <div class="form-check m-2">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    150 000 CFA - 200 000 CFA
+                                </label>
+                            </div>
+                            <div class="form-check m-2">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    200 000 CFA - 300 000 CFA
+                                </label>
+                            </div>
+                            <div class="form-check m-2">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    300 000 CFA - 400 000 CFA
+                                </label>
+                            </div>
+                            <div class="form-check m-2">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    400 000 CFA - 500 000 CFA
+                                </label>
+                            </div>
+                            <div class="form-check m-2">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    500 000 CFA - 1000 000 CFA
+                                </label>
+                            </div>
+                            <div class="form-check m-2">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    1000 000 CFA & Plus
+                                </label>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div className="col-9 d-flex flex-wrap justify-content-around h-75">
+                        {
+                            categorie === undefined
+                                ? produits.flatMap((categorie) =>
+                                    categorie.produits.map((produit) => (
+                                        <Produit key={produit.nom} produit={produit} /> // Assure-toi d'ajouter une clé unique pour chaque produit
+                                    ))
+                                )
+                                : produits
+                                    .filter((cat) => cat.title === categorie) // Filtrer par la catégorie sélectionnée
+                                    .flatMap((cat) =>
+                                        cat.produits.map((produit) => (
+                                            <Produit key={produit.nom} produit={produit} />
+                                        ))
+                                    )
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </>
     )
 }
 

@@ -114,9 +114,9 @@ const Header = () => {
                                 </div>
                                 <ul className="dropdown-menu dropdown-menu-start mt-2 p-0">
 
-                                    <li className='border-top'><a className="dropdown-item" href="#">Action</a></li>
-                                    <li className='border-top'><a className="dropdown-item" href="#">Another action</a></li>
-                                    <li className='border-top'><a className="dropdown-item" href="#">Something else here</a></li>
+                                    <li className='border-top'><Link to='/produits' className="dropdown-item">Tous</Link></li>
+                                    <li className='border-top'><Link to='/electronique' className="dropdown-item">Electronique</Link></li>
+                                    <li className='border-top'><Link to='/mode' className="dropdown-item">Mode</Link></li>
                                 </ul>
                             </div>
                             <div className="col-8 d-flex justify-content-around align-items-center border-end">
@@ -183,7 +183,7 @@ const Header = () => {
                                     </div>
                                 </div>
                                 <div className="mb-3">
-                                    <select className="form-select" aria-label="Default select example">
+                                    <select className="form-select" aria-label="Type de compte">
                                         <option value="" disabled>Type de compte</option>
                                         <option value="client">Client</option>
                                         <option value="vendeur">Vendeur</option>

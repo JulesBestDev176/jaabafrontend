@@ -7,7 +7,7 @@ const Produit = ({ produit }) => {
         fontWeight: 'bold',
     }
     return (
-        <div className='card col-3 ms-3 p-3'>
+        <div className='card col-3 p-2 ms-3 mb-3'>
             <div className="col">
                 <div className='row'>
                     <img src={"../../public/images/produits/" + `${produit.photo}`} />

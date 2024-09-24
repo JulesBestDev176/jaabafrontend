@@ -13,7 +13,7 @@ import { FaRegCopyright } from "react-icons/fa6";
 const Footer = () => {
     return (
         <>
-            <div className="container-fluid  mt-3 p-3 bg-white d-flex justify-content-center flex-column align-items-center ">
+            <div className="container-fluid  mt-0 p-3 bg-white d-flex justify-content-center flex-column align-items-center ">
                 <div className="row container mt-3 mb-3 border-bottom d-flex ">
                     <div className="col-3 d-flex justify-content-between align-items-center">
                         <div className="col-3 d-flex align-items-center justify-content-center">
