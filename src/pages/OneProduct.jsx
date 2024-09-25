@@ -1,28 +1,38 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import StarRating from '../components/StarRating';
 
-const OneProduct = ({ products }) => {
+const OneProduct = ({ produits, categories }) => {
 
     const { id } = useParams();
-    const titreCategorie = products
-        .find(categorie =>
-            categorie.produits.some(produit => produit.id === parseInt(id))
-        )?.title;
-
-    const produit = products
-        .flatMap(categorie => categorie.produits) // Aplatir le tableau pour obtenir tous les produits
-        .find(produit => produit.id === parseInt(id));
+    const [produit, setProduit] = useState(null);
+    const [categorie, setCategorie] = useState(null);
+    const [quantite, setQuantite] = useState(1);
 
 
-    const [quantite, setQuantite] = useState(produit.quantite);
+    useEffect(() => {
+        // Simuler une requête vers un backend pour récupérer le produit
+        const produitTrouve = produits.find((prod) => prod.id === parseInt(id));
+        if (produitTrouve) {
+            setProduit(produitTrouve);
+            const categorieTrouvee = categories.find(cat => cat.id === produitTrouve.categorie_id);
+            setCategorie(categorieTrouvee);
+
+        }
+    }, [id, produits, categories]);
 
     const handleIncrement = () => {
-        // const nouvelleQuantite = quantite;
-        // updateProduitQuantite(produit.id, nouvelleQuantite);
-        setQuantite(quantite + 1);
-
+        if (quantite < produit.quantite) {
+            setQuantite(quantite + 1);
+        }
     };
+
+
+    if (!produit || !categorie) {
+        return <p>Chargement...</p>;
+    }
+
+
 
     const handleDecrement = () => {
         if (quantite > 1) {
@@ -37,7 +47,7 @@ const OneProduct = ({ products }) => {
     return (
         <>
             <div className="">
-                <p className='txt-gray'>Accueil / Produits / {titreCategorie} / {produit.nom} </p>
+                <p className='txt-gray'>Accueil / Produits / {categorie.nom} / {produit.nom} </p>
             </div>
             <div className="bg-white border-bottom p-3">
                 <div className="row mb-3">
@@ -49,7 +59,7 @@ const OneProduct = ({ products }) => {
                     <div className="col-6 p-3">
                         <div className="row mb-3">
                             <p className="txt-gray">
-                                {titreCategorie}
+                                {categorie.nom}
                             </p>
                         </div>
                         <div className="row">

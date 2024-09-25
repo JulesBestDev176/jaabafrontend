@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { NavLink, Link, useNavigate } from 'react-router-dom'
 import { FaSearch } from "react-icons/fa";
 import { IoIosFlash } from "react-icons/io";
@@ -9,35 +9,60 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { RiMenu2Fill } from "react-icons/ri";
 import { CiHeart } from "react-icons/ci";
 import ProduitPanier from './ProduitPanier';
+import { useUser } from '../services/UserContext';
+
+const Header = ({ categories, utilisateurs, roles, paniers, produits }) => {
 
 
-const Header = () => {
-
-    const [panier, setPanier] = useState([
-        {
-            nom: "Samsung Galaxy S23 Ultra",
-            prix: 100000,
-            photo: "samsung.jpg",
-            quantite: 2
-        },
-        {
-            nom: "Apple iPhone 15 Pro Max",
-            prix: 150000,
-            photo: "iphone.jpg",
-            quantite: 1
-        }
-    ]);
+    const { user, setUser } = useUser();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [total, setTotal] = useState(0)
 
     const navigate = useNavigate();
 
-    const verif = true;
+    const calculerTotal = () => {
+        let total = 0;
+        paniers.forEach(panier => {
+            const produitsPanier = panier.produits;
+            produitsPanier.forEach(prodPanier => {
+                const produit = produits.find(p => p.id === prodPanier.produitId);
+                if (produit) {
+                    total += produit.prix * prodPanier.quantite;
+                } else {
+                    total = 0
+                }
+            });
+        });
+        setTotal(total);
+    };
+
+
+    useEffect(() => {
+        calculerTotal();
+    }, [paniers, produits]);
 
     const handleConnexion = (e) => {
         e.preventDefault();
-        if (verif) {
-            navigate('/compte/profile');
+        const utilisateur = utilisateurs.find((user) => {
+            return user.email === email && user.password === password
+        });
+
+        if (utilisateur) {
+            const role = roles.find((r) => {
+                return r.id === utilisateur.role_id
+            })
+
+            if (role.nom === "client") {
+                setUser(utilisateur);
+                navigate(`/compte/profile`);
+            } else {
+                alert(role.nom)
+            }
 
         } else {
+            const msg = 'Email ou mot de passe incorrect'
+            alert(msg);
             const modalTrigger = document.getElementById('connexionTrigger');
             modalTrigger.click();
 
@@ -64,8 +89,13 @@ const Header = () => {
                                 <p className='m-0 fs-6'>Livraison partout à Dakar.</p>
                             </div>
                             <div className="col-3 text-end d-flex justify-content-around">
-                                <Link to="/" className='txt-jaune fs-6 m-0'><IoIosFlash /> Vente rapide</Link>
-                                <Link to="/about" className='fs-6 m-0 text-white'>A propos</Link>
+                                {
+                                    user ?
+                                        <Link to="/" className='txt-jaune fs-6 m-0'><IoIosFlash /> {user.prenom} {user.nom} </Link>
+                                        :
+                                        <Link to="/" className='txt-jaune fs-6 m-0'><IoIosFlash /> Inconnue </Link>
+
+                                }
                                 <Link to="/contact" className='fs-6 m-0 text-white'>Contact</Link>
                             </div>
                         </div>
@@ -110,7 +140,7 @@ const Header = () => {
                                         </div>
                                         <div className="col">
                                             <button type="button" data-bs-toggle="offcanvas" data-bs-target="#panier" className='txt-noire no-button'>
-                                                0 CFA
+                                                {total.toLocaleString()} CFA
                                             </button>
                                         </div>
                                     </div>
@@ -132,8 +162,17 @@ const Header = () => {
                                 <ul className="dropdown-menu dropdown-menu-start mt-2 p-0">
 
                                     <li className='border-top'><Link to='/produits' className="dropdown-item">Tous</Link></li>
-                                    <li className='border-top'><Link to='/produits/electronique' className="dropdown-item">Electronique</Link></li>
-                                    <li className='border-top'><Link to='/produits/mode' className="dropdown-item">Mode</Link></li>
+                                    {categories.map((categorie) => {
+
+                                        return (
+                                            <li className='border-top' key={categorie.id}>
+                                                <Link to={"/produits/" + `${categorie.id}`} className="dropdown-item">
+                                                    {categorie.nom}
+                                                </Link>
+                                            </li>
+                                        )
+
+                                    })}
                                 </ul>
                             </div>
                             <div className="col-8 d-flex justify-content-around align-items-center border-end">
@@ -161,11 +200,25 @@ const Header = () => {
                             <form>
                                 <div className="mb-3">
                                     <label htmlFor="email" className="form-label">Email</label>
-                                    <input type="email" className="form-control" id="email" />
+                                    <input
+                                        type="email"
+                                        name='email'
+                                        className="form-control"
+                                        id="email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                    />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="password" className="form-label">Mot de passe</label>
-                                    <input type="password" className="form-control" id="password" />
+                                    <input
+                                        type="password"
+                                        name='password'
+                                        className="form-control"
+                                        id="password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
                                 </div>
                                 <div className="col-12 d-flex ">
                                     <div className="col-8">
@@ -236,25 +289,44 @@ const Header = () => {
             {/* Offcanvas Panier */}
             <div className="offcanvas offcanvas-end bg-white" tabIndex="-1" id="panier" aria-labelledby="offcanvasRightLabel">
                 <div className="offcanvas-header border-bottom">
-                    <h5 id="offcanvasRightLabel">Panier  {/*({panier.reduce((total, produit) => total + produit.quantite, 0)}) */} ({panier.length})</h5>
+                    <h5 id="offcanvasRightLabel">Panier  {/*({panier.reduce((total, produit) => total + produit.quantite, 0)}) */}</h5>
                     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body">
                     <div className="row">
-                        {panier.map((produit, index) => {
-                            return <ProduitPanier updateProduitQuantite={updateProduitQuantite} key={index} produit={produit} />
+                        {paniers.map((panier, index) => {
+                            const produitsPanier = panier.produits.map((product) => product);
+
+                            // Filtrer les produits dans la table produits à partir des ids du panier
+                            const produitsFiltre = produits.filter(produit =>
+                                produitsPanier.find((prodPanier) => prodPanier.produitId === produit.id)
+                            );
+
+
+
+                            // Retourner un élément pour chaque produit filtré
+                            return produitsFiltre.map((produitFit, idx) => {
+                                const produitPanier = produitsPanier.find(prodPanier => prodPanier.produitId === produitFit.id);
+
+                                return (
+                                    <ProduitPanier
+                                        updateProduitQuantite={updateProduitQuantite}
+                                        key={idx}
+                                        produit={produitFit}
+                                        quantite={produitPanier ? produitPanier.quantite : 0} // Quantité associée au produit dans le panier
+                                    />
+                                );
+                            });
                         })}
                     </div>
+
                     <div className="row">
                         <div className="col-6">
                             <p>Sous-total: </p>
                         </div>
                         <div className="col-6 text-end">
                             <p className='txt-blue'>
-                                {
-                                    panier.reduce((total, produit) => total + produit.prix, 0)
-                                }
-                                &nbsp;CFA
+                                {total.toLocaleString()} CFA
                             </p>
                         </div>
                     </div>

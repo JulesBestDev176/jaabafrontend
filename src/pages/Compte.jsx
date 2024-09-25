@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { NavLink, Link, useNavigate, Outlet } from 'react-router-dom'
 
-const Compte = () => {
+const Compte = ({ utilisateur }) => {
     const [activeLink, setActiveLink] = useState('profile'); // Défaut sur 'profile'
 
     const handleLinkClick = (link) => {
@@ -11,7 +11,7 @@ const Compte = () => {
     return (
         <>
             <div className="row container-fluid p-3">
-                <p className='txt-gray'>Accueil / Compte</p>
+                <p className='txt-gray'>Accueil / Compte / {utilisateur.prenom} {utilisateur.nom} </p>
             </div>
             <div className="container-fluid bg-white d-flex justify-content-center">
                 <div className="col-12 d-flex justify-content-around p-3 mb-3 mt-3 w-full">

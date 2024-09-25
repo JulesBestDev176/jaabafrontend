@@ -32,7 +32,8 @@ const Produit = ({ produit }) => {
                             <button className='btn mb-2 border-primary w-100' style={bouton}>AJOUTER AU PANIER  </button>
                         </div>
                     </div>
-                </div></Link>
+                </div>
+            </Link>
         </div>
     )
 }

@@ -3,10 +3,11 @@ import { Outlet } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
 
-const Container = () => {
+const Container = ({ categories, utilisateurs, roles, paniers, produits }) => {
+
     return (
         <>
-            <Header />
+            <Header categories={categories} utilisateurs={utilisateurs} roles={roles} paniers={paniers} produits={produits} />
             <div style={{ marginTop: '200px' }}> {/* Ajuste la valeur selon la hauteur de ton header */}
                 <Outlet />
             </div>
