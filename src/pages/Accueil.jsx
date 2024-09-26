@@ -1,5 +1,5 @@
 import React from 'react'
-import Categorie from '../components/categorie'
+import Categorie from '../components/Categorie'
 import Boutique from '../components/Boutique'
 import Pub from '../components/Pub'
 import ProduitsAccueil from '../components/ProduitsAccueil';
