@@ -8,6 +8,8 @@ const Compte = ({ utilisateur }) => {
         setActiveLink(link); // Met à jour l'état du lien actif
     };
 
+
+
     return (
         <>
             <div className="row container-fluid p-3">

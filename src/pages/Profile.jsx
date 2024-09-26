@@ -25,6 +25,8 @@ const Profile = ({ utilisateur, adresses }) => {
         }
     };
 
+    const imageUrl = new URL(`../assets/images/profil/${utilisateur.photo}`, import.meta.url).href;
+
 
 
     // const handleSubmit = async (event) => {
@@ -70,10 +72,10 @@ const Profile = ({ utilisateur, adresses }) => {
                 <div className="d-flex justify-content-center">
                     <div className="position-relative">
                         <img
-                            src={"../assets//images/profil/" + `${utilisateur.photo}`}
+                            src={imageUrl}
+                            alt={utilisateur.nom}
                             className="rounded-circle border border-success"
                             style={{ width: "150px", height: "150px", objectFit: "cover" }}
-                            alt="User avatar"
                         />
                         <div className="position-absolute" style={{ bottom: "5px", right: "5px" }}>
                             <input type="file" id="image" className="d-none" name='photo' onChange={handlePhotoChange} />
