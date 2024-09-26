@@ -10,7 +10,7 @@ const Accueil = ({ categories, produits, boutiques }) => {
 
 
 
-    console.log(boutiques)
+
 
     return (
         <>

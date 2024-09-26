@@ -10,13 +10,16 @@ const Produit = ({ produit }) => {
     }
 
 
+    const imageUrl = new URL(`../assets/images/produits/${produit.photo}`, import.meta.url).href;
 
     return (
+
         <div className='card col-3 p-2 ms-3 mb-3'>
             <Link to={`/produit/${produit.id}`}>
                 <div className="col">
                     <div className='row'>
-                        <img src={"../../public/images/produits/" + `${produit.photo}`} />
+                        <img src={imageUrl}
+                            alt={produit.nom} />
                     </div>
                     <div className="row">
                         <p>{produit.nom}</p>

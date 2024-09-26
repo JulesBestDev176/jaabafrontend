@@ -9,6 +9,8 @@ const OneProduct = ({ produits, categories }) => {
     const [categorie, setCategorie] = useState(null);
     const [quantite, setQuantite] = useState(1);
 
+    const imageUrl = new URL(`../assets/images/produits/${produit.photo}`, import.meta.url).href;
+
 
     useEffect(() => {
         // Simuler une requête vers un backend pour récupérer le produit
@@ -53,7 +55,8 @@ const OneProduct = ({ produits, categories }) => {
                 <div className="row mb-3">
                     <div className="col-6 border-end d-flex justify-content-center align-items-center">
                         <div className="row d-flex justify-content-center align-items-center">
-                            <img src={"../../public/images/produits/" + `${produit.photo}`} alt={produit.nom} style={{ width: '300px' }} />
+                            <img src={imageUrl}
+                                alt={produit.nom} style={{ width: '300px' }} />
                         </div>
                     </div>
                     <div className="col-6 p-3">

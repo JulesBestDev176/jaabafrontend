@@ -12,6 +12,7 @@ import Compte from './pages/Compte'
 import Commande from './pages/Commande'
 import Profile from './pages/Profile'
 import { useUser } from './services/UserContext';
+import data from './assets/data.json'
 
 function App() {
 
@@ -25,19 +26,17 @@ function App() {
   const [boutiques, setBoutiques] = useState([]);
   const { user } = useUser()
 
+  console.log(data);
+
   useEffect(() => {
-    fetch('../public/data.JSON')
-      .then(response => response.json())
-      .then(data => {
-        setCategories(data.categorie);
-        setProduits(data.produit);
-        setUtilisateurs(data.utilisateur);
-        setRoles(data.role);
-        setCommandes(data.commande)
-        setAdresses(data.adresse)
-        setPaniers(data.panier)
-        setBoutiques(data.boutique)
-      });
+    setCategories(data.categorie);
+    setProduits(data.produit);
+    setUtilisateurs(data.utilisateur);
+    setRoles(data.role);
+    setCommandes(data.commande);
+    setAdresses(data.adresse);
+    setPaniers(data.panier);
+    setBoutiques(data.boutique);
   }, []);
 
 

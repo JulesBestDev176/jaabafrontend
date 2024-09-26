@@ -70,7 +70,7 @@ const Profile = ({ utilisateur, adresses }) => {
                 <div className="d-flex justify-content-center">
                     <div className="position-relative">
                         <img
-                            src={"../../public/images/profil/" + `${utilisateur.photo}`}
+                            src={"../assets//images/profil/" + `${utilisateur.photo}`}
                             className="rounded-circle border border-success"
                             style={{ width: "150px", height: "150px", objectFit: "cover" }}
                             alt="User avatar"

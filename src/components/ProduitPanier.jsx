@@ -20,11 +20,13 @@ const ProduitPanier = ({ produit, updateProduitQuantite }) => {
         }
     };
 
+    const imageUrl = new URL(`../assets/images/produits/${produit.photo}`, import.meta.url).href;
 
     return (
         <div className='col-12 d-flex mt-3 mb-3 border-bottom'>
             <div className="col-3">
-                <img src={"../../public/images/produits/" + `${produit.photo}`} style={{ width: '70px', height: '70px' }} />
+                <img src={imageUrl}
+                    alt={produit.nom} style={{ width: '70px', height: '70px' }} />
             </div>
             <div className="col-9">
                 <div className="col-12">
