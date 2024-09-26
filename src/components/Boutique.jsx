@@ -1,5 +1,5 @@
 import React from 'react'
-import Start from './Start'
+// import Start from './Start'
 
 const Boutique = ({ boutique }) => {
     return (
@@ -13,7 +13,7 @@ const Boutique = ({ boutique }) => {
                         {boutique.nom}
                     </div>
                     <div className="col-12">
-                        <Start note={boutique.note} />
+                        {/* <Start note={boutique.note} /> */}
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import StarRating from '../components/StarRating';
+// import StarRating from '../components/StarRating';
 
 const OneProduct = ({ produits, categories }) => {
 
@@ -118,7 +118,7 @@ const OneProduct = ({ produits, categories }) => {
                                 <p className="txt-gray">Votre code <span className='txt-red'>*</span></p>
                             </div>
                             <div className="col-2">
-                                <StarRating />
+                                {/* <StarRating /> */}
                             </div>
                             <div className="col-4"></div>
                         </div>
